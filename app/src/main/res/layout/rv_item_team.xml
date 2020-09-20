@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
+            name="league_model"
+            type="com.jorge_diaz.leagues.viewmodel.league.LeagueViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/padding_top_team_item_recycler_view"
+        android:onClick="@{() -> league_model.onTeamClick(position)}">
+
+        <ImageView
+            android:id="@+id/iv_team_badge"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="0.5"
+            android:scaleType="fitXY"
+            app:loadImage="@{league_model.getTeamAt(position).strTeamBadge}"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@{league_model.getTeamAt(position).strTeam}"
+                android:textSize="20sp"
+                tools:text="Team Name" />
+
+            <TextView
+                android:id="@+id/tv_stadium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@{league_model.getTeamAt(position).strStadium}"
+                android:textSize="20sp"
+                tools:text="Stadium Name" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>
+

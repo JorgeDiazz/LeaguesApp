@@ -1,0 +1,59 @@
+package com.jorge_diaz.leagues.model.league
+
+import android.content.Context
+import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
+import com.jorge_diaz.leagues.model.team.Team
+import com.jorge_diaz.leagues.rest.Endpoints
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class LeagueRepositoryImpl @Inject constructor(
+    val context: Context,
+    private val endpoints: Endpoints
+) : ILeagueRepository {
+
+    private val API_KEY = 1; // Remove it to use later
+
+    private val league = MutableLiveData<League>()
+    private val team = MutableLiveData<Team>()
+
+    override fun getLeague(): MutableLiveData<League> {
+        return league
+    }
+
+    override fun callLeagueAPI(leagueName: String) {
+        val call = endpoints.getLeague(API_KEY, leagueName)
+        call.enqueue(LeagueAPIResponse())
+    }
+
+    inner class LeagueAPIResponse : Callback<League> {
+        override fun onResponse(call: Call<League>, response: Response<League>) {
+            if (response.isSuccessful) {
+                league.postValue(response.body()!!)
+            } else {
+                Toast.makeText(context, "League API response is unsuccessful!", Toast.LENGTH_LONG)
+                    .show()
+                league.postValue(null)
+            }
+        }
+
+        override fun onFailure(call: Call<League>, t: Throwable) {
+            Toast.makeText(context, "Error getting league data: $t", Toast.LENGTH_LONG).show()
+            league.postValue(null)
+        }
+
+    }
+
+    override fun getTeamClicked(): MutableLiveData<Team> {
+        return team
+    }
+
+    override fun callTeamClicked(teamClicked: Team) {
+        team.value = teamClicked
+    }
+}

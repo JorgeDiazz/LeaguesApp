@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btn_laliga"
+        android:icon="@drawable/ic_laliga"
+        android:title="@string/LaLiga" />
+
+    <item
+        android:id="@+id/btn_premier_league"
+        android:icon="@drawable/ic_premier_league"
+        android:title="@string/PremierLeague" />
+
+    <item
+        android:id="@+id/btn_bundesliga"
+        android:icon="@drawable/ic_bundesliga"
+        android:title="@string/Bundesliga" />
+
+</menu>

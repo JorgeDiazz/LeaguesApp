@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Leagues App</string>
+    <string name="LaLiga">La Liga</string>
+    <string name="PremierLeague">Premier League</string>
+    <string name="Bundesliga">Bundesliga</string>
+    <string name="its_jersey">Its Jersey</string>
+    <string name="description">Description</string>
+    <string name="foundation_year">Foundation Year</string>
+    <string name="next_5_events">Next 5 Events</string>
+    <string name="social_networks">Social Networks</string>
+    <string name="website">Website</string>
+</resources>

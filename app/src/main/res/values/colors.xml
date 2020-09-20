@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/colorPrimaryDark</color>
+    <color name="colorPrimaryDark">#002346</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="white">#FFF</color>
+    <color name="toolbar_green_title">#40C057</color>
+    <color name="gray_team_detail_title">#3A404C</color>
+    <color name="blue_team_detail_subtitle">#228BE6</color>
+    <color name="dividing_line">#3A404C</color>
+</resources>

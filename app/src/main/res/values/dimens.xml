@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottom_navigation_view_height">56dp</dimen>
+    <dimen name="padding_bottom_teams_recycler_view">55dp</dimen>
+    <dimen name="padding_top_team_item_recycler_view">15dp</dimen>
+    <dimen name="size_app_name_title">45sp</dimen>
+    <dimen name="text_content_team_detail">18sp</dimen>
+    <dimen name="margin_top_content_team_detail">10dp</dimen>
+</resources>
