@@ -1,6 +1,7 @@
 package com.jorge_diaz.leagues
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.jorge_diaz.leagues.UIutils.FragmentUtils.Companion.addFragment
@@ -12,6 +13,7 @@ import com.jorge_diaz.leagues.view.league.LeagueFragment
 import com.jorge_diaz.leagues.view.team.TeamFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_league.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,7 +70,13 @@ class MainActivity : AppCompatActivity() {
         main_toolbar.visibility = View.GONE
 
         val teamFragment = TeamFragment.newInstance(team)
+
         addFragment(teamFragment, R.id.fragment_container)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        setUpBottomNavigationView()
     }
 
 }

@@ -214,6 +214,7 @@
                     android:background="@color/dividing_line" />
 
                 <TextView
+                    android:id="@+id/tv_website_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/berlin_sans_fb_regular"
@@ -236,6 +237,7 @@
                     tools:text="https://clubwebsite.com" />
 
                 <TextView
+                    android:id="@+id/tv_social_networks_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/berlin_sans_fb_regular"

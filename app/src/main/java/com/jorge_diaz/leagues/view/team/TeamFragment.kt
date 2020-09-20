@@ -1,6 +1,7 @@
 package com.jorge_diaz.leagues.view.team
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jorge_diaz.leagues.R
 import com.jorge_diaz.leagues.UIutils.FragmentUtils
+import com.jorge_diaz.leagues.UIutils.FragmentUtils.Companion.removeFragmentFromStack
 import com.jorge_diaz.leagues.databinding.FragmentTeamBinding
 import com.jorge_diaz.leagues.di.LeaguesApplication
 import com.jorge_diaz.leagues.model.team.Team
@@ -48,6 +50,7 @@ class TeamFragment(private val team: Team) :
         setUpView()
     }
 
+
     private fun setUpInjection() {
         (activity!!.applicationContext as LeaguesApplication).component.inject(this)
     }
@@ -64,9 +67,24 @@ class TeamFragment(private val team: Team) :
     }
 
     private fun setUpView() {
+        setUpBackPressedListener()
         setUpViewImages()
         setUpViewTextContent()
         setUpSocialNetworksClickListener()
+    }
+
+    private fun setUpBackPressedListener() {
+        view!!.isFocusableInTouchMode = true
+        view!!.requestFocus()
+        view!!.setOnKeyListener { _, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                removeFragmentFromStack(this)
+                activity!!.onBackPressed()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     private fun setUpViewImages() {
@@ -79,12 +97,25 @@ class TeamFragment(private val team: Team) :
         tv_team_name_header.text = team.strTeam
         tv_description.text = team.strDescriptionEN
         tv_foundation_year.text = team.intFormedYear.toString()
+        setUpWebsiteContent()
+    }
+
+    private fun setUpWebsiteContent() {
+        if (team.strWebsite.isEmpty()) {
+            tv_website_title.visibility = View.GONE
+            tv_website.visibility = View.GONE
+        } else {
+            tv_website.text = team.strWebsite
+        }
     }
 
     private fun setUpSocialNetworksClickListener() {
+        var teamHasSocialNetwork = false
+
         if (team.strFacebook.isEmpty()) {
             ib_facebook.visibility = View.GONE
         } else {
+            teamHasSocialNetwork = true
             ib_facebook.setOnClickListener {
                 FragmentUtils.openLinkInBrowser(
                     this,
@@ -96,6 +127,7 @@ class TeamFragment(private val team: Team) :
         if (team.strInstagram.isEmpty()) {
             ib_instagram.visibility = View.GONE
         } else {
+            teamHasSocialNetwork = true
             ib_instagram.setOnClickListener {
                 FragmentUtils.openLinkInBrowser(
                     this,
@@ -108,6 +140,7 @@ class TeamFragment(private val team: Team) :
             ib_twitter.visibility = View.GONE
         } else {
             ib_twitter.setOnClickListener {
+                teamHasSocialNetwork = true
                 FragmentUtils.openLinkInBrowser(
                     this,
                     formatUrl(team.strTwitter)
@@ -119,11 +152,16 @@ class TeamFragment(private val team: Team) :
             ib_youtube.visibility = View.GONE
         } else {
             ib_youtube.setOnClickListener {
+                teamHasSocialNetwork = true
                 FragmentUtils.openLinkInBrowser(
                     this,
                     formatUrl(team.strYoutube)
                 )
             }
+        }
+
+        if (!teamHasSocialNetwork) {
+            tv_social_networks_title.visibility = View.GONE
         }
     }
 
