@@ -7,7 +7,7 @@
     <color name="toolbar_green_title">#40C057</color>
     <color name="gray_team_detail_title">#3A404C</color>
     <color name="blue_team_detail_subtitle">#228BE6</color>
-    <color name="dividing_line">#3A404C</color>
+    <color name="dividing_line">#3A404C55</color>
     <color name="green_event_list_item_title">#40C057</color>
     <color name="blue_event_name_list_item">#016197</color>
     <color name="red_league_name_list_item">#BB0000</color>

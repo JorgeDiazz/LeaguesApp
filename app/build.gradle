@@ -87,8 +87,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    // ExpandableTextView package for TextView collapsing
-    implementation 'at.blogc:expandabletextview:1.0.5'
+    // SeeMoreTextView package for TextView collapsing
+    implementation 'com.github.AhmMhd:SeeMoreTextView-Android:1.0.0'
+
 
 
 }

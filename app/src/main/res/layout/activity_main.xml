@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_navigation_view_height"
         android:background="@color/colorPrimaryDark"
-        app:itemIconSize="25dp"
+        app:itemIconSize="@dimen/size_bottom_navigation_view_items"
 
         app:itemTextColor="@color/white"
         app:labelVisibilityMode="labeled"

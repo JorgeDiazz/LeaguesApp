@@ -18,19 +18,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="@dimen/margin_bottom_event_list_item"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center_horizontal"
         android:onClick="@{() -> league_model.onTeamClick(position)}"
         android:orientation="horizontal"
-        android:paddingTop="@dimen/padding_top_team_item_recycler_view">
+        android:paddingTop="@dimen/padding_top_team_item_recycler_view"
+        tools:ignore="UnusedAttribute">
 
         <ImageView
             android:id="@+id/iv_team_badge"
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="@dimen/height_team_image"
             android:layout_weight="0.5"
             android:contentDescription="@string/team_badge"
             android:scaleType="fitXY"
@@ -40,7 +41,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/default_margin_between_resources"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -49,7 +50,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="@dimen/margin_bottom_event_list_item_text"
                 android:text="@{league_model.getTeamAt(position).strTeam}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_team_item_title"
@@ -59,7 +60,7 @@
                 android:id="@+id/tv_stadium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="6dp"
+                android:layout_marginBottom="@dimen/margin_bottom_event_list_item_text"
                 android:text="@{league_model.getTeamAt(position).strStadium}"
                 android:textColor="@color/red_league_name_list_item"
                 android:textSize="@dimen/text_size_team_item_title"

@@ -5,7 +5,6 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.OvershootInterpolator
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -98,18 +97,9 @@ class TeamFragment(private val team: Team) :
     private fun setUpViewTextContent() {
         tv_team_name.text = team.strTeam
         tv_team_name_header.text = team.strTeam
-        tv_expandable_description.text = team.strDescriptionEN
+        tv_expandable_description.setContent(team.strDescriptionEN)
         tv_foundation_year.text = team.intFormedYear.toString()
-        setUpExpandableDescriptionTextView()
         setUpWebsiteContent()
-    }
-
-    private fun setUpExpandableDescriptionTextView() {
-        tv_expandable_description.setInterpolator(OvershootInterpolator())
-
-        tv_expandable_description.setOnClickListener {
-            tv_expandable_description.toggle()
-        }
     }
 
     private fun setUpWebsiteContent() {
