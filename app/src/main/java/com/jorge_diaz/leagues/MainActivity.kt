@@ -1,7 +1,6 @@
 package com.jorge_diaz.leagues
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.jorge_diaz.leagues.UIutils.FragmentUtils.Companion.addFragment
@@ -16,6 +15,8 @@ import kotlinx.android.synthetic.main.fragment_league.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var existActiveFragment: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpBottomNavigationView() {
-        bnv_main_activity.visibility = View.VISIBLE
         bnv_main_activity.itemIconTintList = null
 
         bnv_main_activity.setOnNavigationItemSelectedListener { menuItem ->
@@ -66,17 +66,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpTeamDetailFragment(team: Team) {
-        bnv_main_activity.visibility = View.INVISIBLE
-        main_toolbar.visibility = View.GONE
+        setUpTeamDetailFragmentVisibilities()
 
         val teamFragment = TeamFragment.newInstance(team)
-
         addFragment(teamFragment, R.id.fragment_container)
+        existActiveFragment = true
+    }
+
+    private fun setUpTeamDetailFragmentVisibilities() {
+        bnv_main_activity.visibility = View.INVISIBLE
+        main_toolbar.visibility = View.GONE
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        setUpBottomNavigationView()
+        if (existActiveFragment) {
+            setUpMainActivityVisibilities()
+            existActiveFragment = false
+        } else {
+            super.onBackPressed()
+        }
     }
 
+    private fun setUpMainActivityVisibilities() {
+        main_toolbar.visibility = View.VISIBLE
+        bnv_main_activity.visibility = View.VISIBLE
+    }
 }

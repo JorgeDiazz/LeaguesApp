@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.jorge_diaz.leagues.model.team.Team
 import com.jorge_diaz.leagues.rest.Endpoints
+import com.jorge_diaz.leagues.utils.RestUtils.Companion.API_KEY
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,8 +17,6 @@ class LeagueRepositoryImpl @Inject constructor(
     val context: Context,
     private val endpoints: Endpoints
 ) : ILeagueRepository {
-
-    private val API_KEY = 1; // Remove it to use later
 
     private val league = MutableLiveData<League>()
     private val team = MutableLiveData<Team>()
@@ -38,13 +37,13 @@ class LeagueRepositoryImpl @Inject constructor(
             } else {
                 Toast.makeText(context, "League API response is unsuccessful!", Toast.LENGTH_LONG)
                     .show()
-                league.postValue(null)
+                league.postValue(League())
             }
         }
 
-        override fun onFailure(call: Call<League>, t: Throwable) {
-            Toast.makeText(context, "Error getting league data: $t", Toast.LENGTH_LONG).show()
-            league.postValue(null)
+        override fun onFailure(call: Call<League>, throwable: Throwable) {
+            Toast.makeText(context, "Error getting league data: $throwable", Toast.LENGTH_LONG).show()
+            league.postValue(League())
         }
 
     }

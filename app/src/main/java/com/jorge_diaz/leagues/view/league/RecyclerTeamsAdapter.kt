@@ -1,4 +1,4 @@
-package com.jorge_diaz.leagues.view
+package com.jorge_diaz.leagues.view.league
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jorge_diaz.leagues.BR
 import com.jorge_diaz.leagues.model.team.Team
 import com.jorge_diaz.leagues.viewmodel.league.LeagueViewModel
-import com.jorge_diaz.leagues.viewmodel.team.TeamViewModel
 
 class RecyclerTeamsAdapter(
     private val teamViewModel: LeagueViewModel,
@@ -33,6 +32,11 @@ class RecyclerTeamsAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return resource
+    }
+
+    fun submitList(teams: List<Team>) {
+        this.teams = teams
+        notifyDataSetChanged()
     }
 
     inner class TeamViewHolder(private var binding: ViewDataBinding) :

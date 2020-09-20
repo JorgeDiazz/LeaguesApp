@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,8 +9,8 @@
             type="Integer" />
 
         <variable
-            name="league_model"
-            type="com.jorge_diaz.leagues.viewmodel.league.LeagueViewModel" />
+            name="event_model"
+            type="com.jorge_diaz.leagues.viewmodel.event.EventViewModel" />
 
     </data>
 
@@ -21,21 +20,10 @@
         android:layout_marginBottom="40dp"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground"
         android:gravity="center_horizontal"
-        android:onClick="@{() -> league_model.onTeamClick(position)}"
         android:orientation="horizontal"
         android:paddingTop="@dimen/padding_top_team_item_recycler_view">
 
-        <ImageView
-            android:id="@+id/iv_team_badge"
-            android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:layout_weight="0.5"
-            android:contentDescription="@string/team_badge"
-            android:scaleType="fitXY"
-            app:loadImage="@{league_model.getTeamAt(position).strTeamBadge}"
-            tools:src="@drawable/ic_premier_league" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -46,24 +34,32 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:text="@{league_model.getTeamAt(position).strTeam}"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_team_item_title"
-                tools:text="Team Name" />
+                android:text="@{event_model.getEventAt(position).strEvent}"
+                android:textColor="@color/blue_event_name_list_item"
+                android:textSize="20sp"
+                tools:text="Event Name" />
 
             <TextView
-                android:id="@+id/tv_stadium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:text="@{league_model.getTeamAt(position).strStadium}"
+                android:fontFamily="@font/opensans_regular"
+                android:text="@{event_model.getEventDateAt(position)}"
+                android:textColor="@color/green_event_list_item_title"
+                android:textSize="@dimen/text_size_details_event_list_item"
+                tools:text="dd/mm/yyyy - hh:mm" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@{event_model.getEventAt(position).strLeague}"
                 android:textColor="@color/red_league_name_list_item"
-                android:textSize="@dimen/text_size_team_item_title"
-                tools:text="Stadium Name" />
+                android:textSize="@dimen/text_size_details_event_list_item"
+                tools:text="League Name" />
 
         </LinearLayout>
 

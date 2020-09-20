@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="team_model"
-            type="com.jorge_diaz.leagues.viewmodel.team.TeamViewModel" />
+            name="event_model"
+            type="com.jorge_diaz.leagues.viewmodel.event.EventViewModel" />
 
     </data>
 
@@ -36,6 +36,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
                     android:paddingTop="20dp"
                     app:collapsedTitleGravity="center_horizontal"
@@ -54,6 +55,7 @@
                             android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="30dp"
+                            android:contentDescription="@string/team_name"
                             android:padding="10dp"
                             android:scaleType="fitCenter"
                             tools:src="@drawable/ic_bundesliga" />
@@ -63,10 +65,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/berlin_sans_fb_regular"
+                            android:maxLines="1"
                             android:textAlignment="center"
                             android:textColor="@color/gray_team_detail_title"
                             android:textSize="30sp"
-                            tools:text="Team Name" />
+                            tools:text="@string/team_name" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -81,6 +84,7 @@
                             android:layout_height="100dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="30dp"
+                            android:contentDescription="@string/its_jersey"
                             android:padding="10dp"
                             android:scaleType="fitCenter"
                             tools:src="@drawable/ic_bundesliga" />
@@ -128,7 +132,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,15 +151,18 @@
                     android:textColor="@color/blue_team_detail_subtitle"
                     android:textSize="22sp" />
 
-                <TextView
-                    android:id="@+id/tv_description"
+                <at.blogc.android.views.ExpandableTextView
+                    android:id="@+id/tv_expandable_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_top_content_team_detail"
+                    android:ellipsize="end"
                     android:fontFamily="@font/berlin_sans_fb_regular"
+                    android:maxLines="5"
                     android:textAlignment="textStart"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_content_team_detail"
-                    tools:text="@string/description" />
+                    app:animation_duration="750" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -182,6 +189,7 @@
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textAlignment="textStart"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/text_content_team_detail"
                         tools:text="@string/description" />
 
@@ -204,6 +212,14 @@
                     android:textColor="@color/blue_team_detail_subtitle"
                     android:textSize="22sp" />
 
+                <ListView
+                    android:id="@+id/lv_events"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:fadeScrollbars="false"
+                    android:nestedScrollingEnabled="true"
+                    app:setAdapter="@{event_model.listEventsAdapter}"
+                    tools:listitem="@layout/list_item_event" />
 
                 <View
                     android:layout_width="200dp"
@@ -258,6 +274,7 @@
                         android:layout_height="60dp"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:contentDescription="@string/facebook"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_facebook" />
 
@@ -267,6 +284,7 @@
                         android:layout_height="60dp"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:contentDescription="@string/instagram"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_instagram" />
 
@@ -276,6 +294,7 @@
                         android:layout_height="60dp"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:contentDescription="@string/twitter"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_twitter" />
 
@@ -285,6 +304,7 @@
                         android:layout_height="60dp"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:contentDescription="@string/youtube"
                         android:scaleType="centerInside"
                         android:src="@drawable/ic_youtube" />
 

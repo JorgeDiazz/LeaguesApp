@@ -30,12 +30,19 @@ android {
         multiDexEnabled false
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField 'String', 'API_KEY', '"1234567890"'
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        development {
+            buildConfigField 'String', 'API_KEY', '"1"'
+            minifyEnabled false
         }
     }
 
@@ -79,4 +86,9 @@ dependencies {
     // Gson packages for parse json info to kotlin data objects
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    // ExpandableTextView package for TextView collapsing
+    implementation 'at.blogc:expandabletextview:1.0.5'
+
+
 }

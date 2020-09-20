@@ -5,29 +5,33 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.OvershootInterpolator
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.jorge_diaz.leagues.R
 import com.jorge_diaz.leagues.UIutils.FragmentUtils
 import com.jorge_diaz.leagues.UIutils.FragmentUtils.Companion.removeFragmentFromStack
 import com.jorge_diaz.leagues.databinding.FragmentTeamBinding
 import com.jorge_diaz.leagues.di.LeaguesApplication
+import com.jorge_diaz.leagues.model.event.Event
 import com.jorge_diaz.leagues.model.team.Team
 import com.jorge_diaz.leagues.utils.UrlUtils.Companion.formatUrl
-import com.jorge_diaz.leagues.viewmodel.team.TeamViewModel
+import com.jorge_diaz.leagues.viewmodel.event.EventViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_team.*
 import javax.inject.Inject
 import javax.inject.Named
 
+
 class TeamFragment(private val team: Team) :
     Fragment() {
 
-    @field:[Inject Named("teamViewModelFactory")]
-    lateinit var teamViewModelFactory: ViewModelProvider.Factory
+    @field:[Inject Named("eventViewModelFactory")]
+    lateinit var eventViewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var teamViewModel: TeamViewModel
+    private lateinit var eventViewModel: EventViewModel
     private lateinit var binding: FragmentTeamBinding
 
     override fun onCreateView(
@@ -50,40 +54,39 @@ class TeamFragment(private val team: Team) :
         setUpView()
     }
 
-
     private fun setUpInjection() {
         (activity!!.applicationContext as LeaguesApplication).component.inject(this)
     }
 
     private fun setUpBindings() {
-        setUpTeamViewModel()
+        setUpEventViewModel()
     }
 
-    private fun setUpTeamViewModel() {
-        teamViewModel =
-            ViewModelProvider(this, teamViewModelFactory).get(TeamViewModel::class.java)
+    private fun setUpEventViewModel() {
+        eventViewModel =
+            ViewModelProvider(this, eventViewModelFactory).get(EventViewModel::class.java)
 
-        binding.teamModel = teamViewModel
+        binding.eventModel = eventViewModel
     }
 
     private fun setUpView() {
-        setUpBackPressedListener()
+        setUpBackButtonPressedListener()
         setUpViewImages()
         setUpViewTextContent()
         setUpSocialNetworksClickListener()
+        setUpEventsListUpdate(team.idTeam)
     }
 
-    private fun setUpBackPressedListener() {
+    private fun setUpBackButtonPressedListener() {
         view!!.isFocusableInTouchMode = true
         view!!.requestFocus()
         view!!.setOnKeyListener { _, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 removeFragmentFromStack(this)
                 activity!!.onBackPressed()
-                true
-            } else {
-                false
+                return@setOnKeyListener true
             }
+            return@setOnKeyListener false
         }
     }
 
@@ -95,9 +98,18 @@ class TeamFragment(private val team: Team) :
     private fun setUpViewTextContent() {
         tv_team_name.text = team.strTeam
         tv_team_name_header.text = team.strTeam
-        tv_description.text = team.strDescriptionEN
+        tv_expandable_description.text = team.strDescriptionEN
         tv_foundation_year.text = team.intFormedYear.toString()
+        setUpExpandableDescriptionTextView()
         setUpWebsiteContent()
+    }
+
+    private fun setUpExpandableDescriptionTextView() {
+        tv_expandable_description.setInterpolator(OvershootInterpolator())
+
+        tv_expandable_description.setOnClickListener {
+            tv_expandable_description.toggle()
+        }
     }
 
     private fun setUpWebsiteContent() {
@@ -163,6 +175,14 @@ class TeamFragment(private val team: Team) :
         if (!teamHasSocialNetwork) {
             tv_social_networks_title.visibility = View.GONE
         }
+    }
+
+
+    private fun setUpEventsListUpdate(idTeam: Int) {
+        eventViewModel.callEvents(idTeam)
+        eventViewModel.getEvents().observe(viewLifecycleOwner, Observer { events: List<Event> ->
+            eventViewModel.setEventsInListAdapter(events)
+        })
     }
 
 

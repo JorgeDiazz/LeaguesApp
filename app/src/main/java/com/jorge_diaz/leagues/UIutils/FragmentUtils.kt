@@ -17,7 +17,7 @@ class FragmentUtils {
         }
 
         fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
-            supportFragmentManager.inTransaction { add(frameId, fragment).addToBackStack(fragment.toString()) }
+            supportFragmentManager.inTransaction { add(frameId, fragment) }
         }
 
         fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {

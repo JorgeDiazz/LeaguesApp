@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LeagueObservable @Inject constructor(private var leagueRepository: ILeagueRepository) :
     BaseObservable(), ILeagueObservable {
-    // Repository connection
+
     override fun callLeague(leagueName: String) {
         leagueRepository.callLeagueAPI(leagueName)
     }
@@ -16,7 +16,6 @@ class LeagueObservable @Inject constructor(private var leagueRepository: ILeague
         leagueRepository.callTeamClicked(team)
     }
 
-    // ViewModel connection
     override fun getLeague(): MutableLiveData<League> {
         return leagueRepository.getLeague()
     }

@@ -6,14 +6,14 @@ import com.jorge_diaz.leagues.model.league.ILeagueObservable
 import com.jorge_diaz.leagues.model.league.ILeagueRepository
 import com.jorge_diaz.leagues.model.league.LeagueObservable
 import com.jorge_diaz.leagues.model.league.LeagueRepositoryImpl
-import com.jorge_diaz.leagues.model.team.ITeamObservable
-import com.jorge_diaz.leagues.model.team.ITeamRepository
-import com.jorge_diaz.leagues.model.team.TeamObservable
-import com.jorge_diaz.leagues.model.team.TeamRepositoryImpl
+import com.jorge_diaz.leagues.model.event.IEventObservable
+import com.jorge_diaz.leagues.model.event.IEventRepository
+import com.jorge_diaz.leagues.model.event.EventObservable
+import com.jorge_diaz.leagues.model.event.EventRepositoryImpl
 import com.jorge_diaz.leagues.rest.Endpoints
 import com.jorge_diaz.leagues.rest.ServiceBuilder
 import com.jorge_diaz.leagues.viewmodel.league.LeagueViewModelFactory
-import com.jorge_diaz.leagues.viewmodel.team.TeamViewModelFactory
+import com.jorge_diaz.leagues.viewmodel.event.EventViewModelFactory
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -31,16 +31,14 @@ class AppModule(private var leaguesApplication: LeaguesApplication) {
     fun provideContext(): Context = leaguesApplication.applicationContext
 
     @Provides
-    @Singleton
     @Named("leagueViewModelFactory")
     fun provideLeagueViewModelFactory(leagueViewModelFactory: LeagueViewModelFactory): ViewModelProvider.Factory =
         leagueViewModelFactory
 
     @Provides
-    @Singleton
-    @Named("teamViewModelFactory")
-    fun provideTeamViewModelFactory(teamViewModelFactory: TeamViewModelFactory): ViewModelProvider.Factory =
-        teamViewModelFactory
+    @Named("eventViewModelFactory")
+    fun provideEventViewModelFactory(eventViewModelFactory: EventViewModelFactory): ViewModelProvider.Factory =
+        eventViewModelFactory
 
 
     @Provides
@@ -48,7 +46,6 @@ class AppModule(private var leaguesApplication: LeaguesApplication) {
     fun provideEndpoints(): Endpoints = ServiceBuilder.buildService(Endpoints::class.java)
 
     @Provides
-    @Singleton
     fun provideILeagueRepository(context: Context, endpoints: Endpoints): ILeagueRepository =
         LeagueRepositoryImpl(
             context,
@@ -56,22 +53,19 @@ class AppModule(private var leaguesApplication: LeaguesApplication) {
         )
 
     @Provides
-    @Singleton
     fun provideILeagueObservable(leagueRepository: ILeagueRepository): ILeagueObservable =
         LeagueObservable(leagueRepository)
 
 
     @Provides
-    @Singleton
-    fun provideITeamRepository(context: Context, endpoints: Endpoints): ITeamRepository =
-        TeamRepositoryImpl(
+    fun provideIEventRepository(context: Context, endpoints: Endpoints): IEventRepository =
+        EventRepositoryImpl(
             context,
             endpoints
         )
 
     @Provides
-    @Singleton
-    fun provideITeamObservable(teamRepository: ITeamRepository): ITeamObservable =
-        TeamObservable(teamRepository)
+    fun provideIEventObservable(eventRepository: IEventRepository): IEventObservable =
+        EventObservable(eventRepository)
 
 }

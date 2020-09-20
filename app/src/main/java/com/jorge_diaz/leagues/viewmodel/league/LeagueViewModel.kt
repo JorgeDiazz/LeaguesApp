@@ -8,12 +8,14 @@ import com.jorge_diaz.leagues.R
 import com.jorge_diaz.leagues.model.league.ILeagueObservable
 import com.jorge_diaz.leagues.model.league.League
 import com.jorge_diaz.leagues.model.team.Team
-import com.jorge_diaz.leagues.view.RecyclerTeamsAdapter
+import com.jorge_diaz.leagues.view.league.RecyclerTeamsAdapter
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class LeagueViewModel @Inject constructor(private val leagueObservable: ILeagueObservable) :
     ViewModel() {
+
+    private var recyclerTeamsAdapter: RecyclerTeamsAdapter? = null
 
     fun callLeague(leagueName: String) {
         leagueObservable.callLeague(leagueName)
@@ -23,15 +25,16 @@ class LeagueViewModel @Inject constructor(private val leagueObservable: ILeagueO
         return leagueObservable.getLeague()
     }
 
-    private var recyclerTeamsAdapter: RecyclerTeamsAdapter? = null
-
     fun setTeamsInRecyclerAdapter(teams: List<Team>) {
-        recyclerTeamsAdapter?.teams = teams
-        recyclerTeamsAdapter?.notifyDataSetChanged()
+        recyclerTeamsAdapter!!.submitList(teams)
     }
 
     fun getRecyclerTeamsAdapter(): RecyclerTeamsAdapter? {
-        recyclerTeamsAdapter = RecyclerTeamsAdapter(this, R.layout.rv_item_team)
+        recyclerTeamsAdapter =
+            RecyclerTeamsAdapter(
+                this,
+                R.layout.rv_item_team
+            )
         return recyclerTeamsAdapter
     }
 
