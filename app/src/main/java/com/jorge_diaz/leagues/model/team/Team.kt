@@ -7,6 +7,7 @@ data class Team(
     @SerializedName("strTeam") val strTeam: String,
     @SerializedName("intFormedYear") val intFormedYear: Int,
     @SerializedName("idLeague") val idLeague: Int,
+    @SerializedName("strLeague") val strLeague: String,
     @SerializedName("strStadium") val strStadium: String,
     @SerializedName("strWebsite") val strWebsite: String,
     @SerializedName("strFacebook") val strFacebook: String,
@@ -16,5 +17,10 @@ data class Team(
     @SerializedName("strDescriptionEN") val strDescriptionEN: String,
     @SerializedName("strTeamBadge") val strTeamBadge: String,
     @SerializedName("strTeamJersey") val strTeamJersey: String
-
-)
+) {
+    enum class AvailableTeams(val strName: String) {
+        LALIGA("Spanish La Liga"),
+        PREMIER_LEAGUE("English Premier League"),
+        BUNDESLIGA("German Bundesliga")
+    }
+}

@@ -7,7 +7,6 @@ import com.jorge_diaz.leagues.UIutils.FragmentUtils.Companion.addFragment
 import com.jorge_diaz.leagues.UIutils.FragmentUtils.Companion.replaceFragment
 import com.jorge_diaz.leagues.di.LeaguesApplication
 import com.jorge_diaz.leagues.model.team.Team
-import com.jorge_diaz.leagues.utils.AvailableTeams
 import com.jorge_diaz.leagues.view.league.LeagueFragment
 import com.jorge_diaz.leagues.view.team.TeamFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpView() {
         setUpBottomNavigationView()
-        setUpLeagueFragment(AvailableTeams.LALIGA.strName)
+        setUpLeagueFragment(Team.AvailableTeams.LALIGA.strName)
     }
 
     private fun setUpBottomNavigationView() {
@@ -41,15 +40,15 @@ class MainActivity : AppCompatActivity() {
         bnv_main_activity.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.btn_laliga -> {
-                    setUpLeagueFragment(AvailableTeams.LALIGA.strName)
+                    setUpLeagueFragment(Team.AvailableTeams.LALIGA.strName)
                     true
                 }
                 R.id.btn_premier_league -> {
-                    setUpLeagueFragment(AvailableTeams.PREMIER_LEAGUE.strName)
+                    setUpLeagueFragment(Team.AvailableTeams.PREMIER_LEAGUE.strName)
                     true
                 }
                 R.id.btn_bundesliga -> {
-                    setUpLeagueFragment(AvailableTeams.BUNDESLIGA.strName)
+                    setUpLeagueFragment(Team.AvailableTeams.BUNDESLIGA.strName)
                     true
                 }
                 else -> false

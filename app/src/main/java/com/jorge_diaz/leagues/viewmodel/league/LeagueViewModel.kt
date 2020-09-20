@@ -12,7 +12,7 @@ import com.jorge_diaz.leagues.view.league.RecyclerTeamsAdapter
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-class LeagueViewModel @Inject constructor(private val leagueObservable: ILeagueObservable) :
+open class LeagueViewModel @Inject constructor(private val leagueObservable: ILeagueObservable) :
     ViewModel() {
 
     private var recyclerTeamsAdapter: RecyclerTeamsAdapter? = null

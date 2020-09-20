@@ -1,9 +1,9 @@
-package com.jorge_diaz.leagues.viewmodel.event
+package com.jorge_diaz.leagues.viewmodel.event.model.event
 
 import com.jorge_diaz.leagues.model.event.Event
 import org.junit.Test
 
-class EventViewModelTest {
+class EventTest {
 
     @Test
     fun sortEventsByDate_isDescendingOrderCorrect() {
@@ -18,7 +18,7 @@ class EventViewModelTest {
         val sortedEvents = Event.sortEventsByDate(events)
         val correctSortedEvents: List<Event> = listOf(event2, event3, event5, event4, event1)
 
-        sortedEvents.zip(correctSortedEvents).forEach { (sortedEvent, correctEvent) -> assert(sortedEvent == correctEvent) }
+        sortedEvents.zip(correctSortedEvents)
+            .forEach { (sortedEvent, correctEvent) -> assert(sortedEvent == correctEvent) }
     }
-
 }
