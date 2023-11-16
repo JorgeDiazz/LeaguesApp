@@ -1,8 +1,6 @@
-# Football League app for Android 
+# Overview: LeaguesApp (Android app)
 
-This is the required Android Application, using Kotlin & MVVM pattern, to accomplish Condor Labs' Skills Test.
-
-
+Welcome to LeaguesApp, an Android application that consumes [The Sports Database](https://www.thesportsdb.com/api.php) to retrieve up-to-date information about leagues and teams, enabling an exploration of the world of football. 
 
 
 ## Installation
@@ -12,7 +10,7 @@ git clone https://github.com/JorgeDiazz/LeaguesApp.git
 ```
 
 ## Build variants
-Use the Android Studio *Build Variants* button to choose between **release** and **development** flavors; taking into account that _development_ environment has a valid API_KEY.
+Use the Android Studio *Build Variants* button to choose between **release** and **development** flavors. Take into account that _development_ environment has a valid API_KEY.
 
 
 ## Maintainers
